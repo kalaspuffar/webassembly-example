@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Addition example</title>
+    <script src="addition.js"></script>
+</head>
+<body>
+    <ul id="resultUL"></ul>
+    <script>
+        Module['onRuntimeInitialized'] = onRuntimeInitialized;
+        const addFunc = Module.cwrap('addition', 'number', ['number', 'number']);
+        const resultUL = document.getElementById('resultUL');
+
+        const showResult = (val) => {
+            const el = document.createElement('li');
+            el.innerHTML = val;
+            resultUL.appendChild(el);
+        }
+
+        function onRuntimeInitialized() {
+            showResult(addFunc(1,3));
+            showResult(addFunc(-1,3));
+            showResult(addFunc(0,2));
+            showResult(addFunc(1,1));
+
+            const addResult = Module.ccall(
+                'addition', 
+                'number', 
+                ['number', 'number'], 
+                [290, 290]);
+            showResult(addResult);
+        }
+    </script>
+</body>
+</html>
