@@ -2,3 +2,8 @@ hello.html
 hello2.html
 *.js
 *.wasm
+flavour-example
+teavm-example
+*.jar
+*.iml
+.vscode

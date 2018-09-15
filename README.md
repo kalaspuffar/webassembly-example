@@ -31,7 +31,20 @@ Next up we have a minimal shell compile with optimization so we can see it in ac
 emcc -o hello2.html hello.c -O3 -s WASM=1 --shell-file shell_minimal.html
 ```
 
+```
+emcc teapot.cpp -s WASM=1 -o teapot.js -s LEGACY_GL_EMULATION=1 -lSDL2 -lGL
+```
+
 Lastly we compile the addition demo exporting the addition function and also the cwrap and ccall functions to create javascript functions to invoke or call your function directly.
 ```
-emcc addition.c -o addition.js -s EXPORTED_FUNCTIONS=['_addition']  -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall','cwrap']
+emcc addition.c -o addition.js -s EXPORTED_FUNCTIONS=['_addition'] -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall','cwrap']
 ```
+
+# Project TeaVM mentioned in video
+
+http://teavm.org/docs/intro/getting-started.html
+
+# To run the jweb example you need to download
+
+https://mvnrepository.com/artifact/de.inetsoftware/jwebassembly-api
+https://mvnrepository.com/artifact/de.inetsoftware/jwebassembly-compiler

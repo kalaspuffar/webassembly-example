@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing wasm</title>
+
+    <style>
+        * {
+            padding: 20px;
+            font-size: 28pt;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultBox"></div>
+
+    <script>
+        var resultBox = document.getElementById('resultBox');
+
+        var importObject = {
+            imports: { imported_func: arg => console.log(arg) }
+        };
+
+        fetch('test.wasm').then(response =>
+            response.arrayBuffer()
+        ).then(bytes =>
+            WebAssembly.instantiate(bytes, importObject)
+        ).then(results => {
+            var addFunction = results.instance.exports.add;
+            resultBox.innerHTML = addFunction(1, 3);
+        });
+    </script>
+</body>
+</html>
